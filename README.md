@@ -85,3 +85,9 @@ CAPTURE_ONE_MCP_ALLOW_WRITE=1 node dist/index.js
 ```
 
 For export/capture/rating changes, set `CAPTURE_ONE_MCP_ALLOW_WRITE` to `1`.
+
+## License
+
+MIT.
+
+This project is not affiliated with, endorsed by, or sponsored by Capture One. Capture One is a trademark of its respective owner.
