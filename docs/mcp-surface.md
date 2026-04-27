@@ -1,6 +1,6 @@
 # Capture One MCP Surface
 
-This project exposes Capture One's macOS AppleScript scripting surface through MCP. It is intentionally a low-level bridge: it can inspect Capture One state, read/write supported settings, and locate preview cache files. It does not include an automated image-editing/style-matching agent.
+This project exposes Capture One's macOS AppleScript scripting surface through MCP. It is intentionally a Capture One-specific low-level bridge: it can inspect Capture One state, read/write supported settings, and locate preview cache files. It does not include an automated image-editing/style-matching agent. See [`automation-scope.md`](automation-scope.md) for the boundary.
 
 ## Connection model
 

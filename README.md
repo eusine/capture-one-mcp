@@ -4,6 +4,12 @@ AppleScript-backed MCP server for Capture One on macOS.
 
 This server uses Capture One's installed scripting dictionary (`CaptureOne.sdef`), not screen scraping. By default the server expects Capture One at `/Applications/Capture One.app`; override with `CAPTURE_ONE_APP` if needed.
 
+## Scope
+
+Capture One MCP is a dedicated MCP control surface for Capture One. It focuses on automation primitives: reading the active Capture One context, reading/writing supported adjustment fields, locating preview cache files, and enabling vision-assisted analysis workflows.
+
+It does **not** try to replace a photographer/retoucher, guarantee exact style matching, or ship a one-click grading bot. See [`docs/automation-scope.md`](docs/automation-scope.md) for the project boundary.
+
 ## Tools
 
 Read-only by default:
