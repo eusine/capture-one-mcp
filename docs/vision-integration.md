@@ -116,15 +116,26 @@ Vision should describe:
 - haze/softness
 - grain and muted editorial finish
 
-## Commercial muted tone guardrails
+## Tone matching priorities
 
-These are practical guardrails from early Capture One matching tests:
+Vision should first identify the reference's photographic intent, then map that intent to Capture One controls. Avoid hard-coded style recipes such as “always desaturate” or “always warm skin.” The same adjective can mean different slider moves depending on the image.
 
-- Keep global `saturation` moderate for commercial references. Start around `-10` rather than `-40`; preserve makeup, hair color, and product/accent color unless they are explicitly too loud.
-- Treat magenta as a surgical correction for gray/green skin, not as a global mood. If the image starts looking pink, reduce `tint` and lower midtone/highlight color-balance saturation before changing everything else.
-- For lifted muted blacks, prefer output-level style controls such as `level target shadow rgb` over crushing with `black recovery`. A small lifted black point can match fashion flash references better than deep digital black.
-- For muted highlights, hold the output/highlight endpoint slightly below pure white with `level target highlight rgb` and highlight/white recovery, instead of simply lowering exposure.
-- Keep `level midtone rgb` at or near its current value. In this bridge it has been observed to default to `0.0`; move it only in tiny increments if the user has confirmed the direction.
+Analyze in this order:
+
+1. **Subject priority** — decide what must match first: face/skin, product, clothing, hair, background, or the whole frame. In commercial/fashion images, the model/product usually wins over the backdrop.
+2. **Luminance structure** — compare exposure, black point, white point, midtone placement, highlight rolloff, and shadow openness. Decide whether the reference is contrasty, compressed, lifted, clipped, matte, glossy, or flash-flat before touching color.
+3. **Color cast and white balance** — separate global WB errors from local casts. Judge whether warmth/coolness or green/magenta bias affects skin, neutrals, shadows, highlights, or only the background.
+4. **Color density** — compare saturation by subject region and hue family. Preserve intentional color in makeup, hair, clothing, and product details; reduce only the hues or regions that are louder than the reference.
+5. **Material rendering** — inspect how skin, hair, fabric, leather, metal, and other materials carry contrast, texture, gloss, and specular highlights. These often matter more than global saturation.
+6. **Finish** — only after tone/color are close, evaluate grain, clarity, haze, vignette, and overall polish.
+
+Control-selection rules:
+
+- Prefer the broadest control that explains the mismatch, but do not use a global control when the mismatch is local to skin, clothing, hair, or background.
+- Treat saturation, tint, and color balance as relative corrections, not style labels. A muted reference can still have strong makeup/hair/product color; a warm reference can still need less magenta.
+- Shape blacks and highlights according to the reference's endpoint behavior: lifted, crushed, glossy, matte, clipped, or compressed. Do not assume deeper black or brighter white is automatically closer.
+- Keep `level midtone rgb` at or near its current value unless analysis specifically proves the midtone pivot is wrong. In this bridge it has been observed to default to `0.0`; move it only in tiny increments.
+- When a reference has conflicting cues, state the tradeoff explicitly: e.g. preserving skin color may prevent the background from matching exactly.
 
 ## Suggested vision response schema
 
