@@ -15,18 +15,20 @@ The vision model should not pretend it can infer exact Capture One slider values
 
 ## Subject-priority rule
 
-For fashion/editorial references, prioritize the model/subject over the background unless background matching is explicitly requested.
+For fashion/commercial/editorial references, prioritize the model/subject over the background unless background matching is explicitly requested.
 
 Recommended analysis order:
 
 1. face/skin brightness, warmth, and color cast
 2. skin contrast and direct-flash definition
-3. hair color density and brightness
+3. makeup and hair color density; these should remain alive in commercial work
 4. black clothing depth, lifted/matte black level, separation, and glossy highlights
-5. accent colors such as shoes/lip/nails
+5. accent colors such as shoes/lip/nails; control distraction without killing product color
 6. background tone only as secondary support
 
 Do not over-brighten or over-cool the whole frame just to match the background. If background and subject conflict, protect the subject.
+
+For commercial fashion, do not equate “muted” with extreme global desaturation. A reference can be muted because its level endpoints, contrast, and highlight response are soft while makeup, hair, and product/accent color remain present. Prefer moderate saturation adjustments first; use channel/local controls for loud colors instead of globally flattening the file.
 
 ## Capture One-oriented analysis axes
 
@@ -65,6 +67,7 @@ Vision should describe:
 - midtone placement
 - highlight rolloff
 - whether blacks should be lifted/matte or deep/crushed
+- Capture One `level midtone rgb` is not Lightroom-style gamma centered around 1.0 in this bridge; observed default is `0.0`. Treat it as a sensitive offset control: use tiny moves around the current value, not jumps like `0.96`, which can blow the image brighter than intended.
 
 ### White balance and cast
 
@@ -112,6 +115,16 @@ Vision should describe:
 - local contrast
 - haze/softness
 - grain and muted editorial finish
+
+## Commercial muted tone guardrails
+
+These are practical guardrails from early Capture One matching tests:
+
+- Keep global `saturation` moderate for commercial references. Start around `-10` rather than `-40`; preserve makeup, hair color, and product/accent color unless they are explicitly too loud.
+- Treat magenta as a surgical correction for gray/green skin, not as a global mood. If the image starts looking pink, reduce `tint` and lower midtone/highlight color-balance saturation before changing everything else.
+- For lifted muted blacks, prefer output-level style controls such as `level target shadow rgb` over crushing with `black recovery`. A small lifted black point can match fashion flash references better than deep digital black.
+- For muted highlights, hold the output/highlight endpoint slightly below pure white with `level target highlight rgb` and highlight/white recovery, instead of simply lowering exposure.
+- Keep `level midtone rgb` at or near its current value. In this bridge it has been observed to default to `0.0`; move it only in tiny increments if the user has confirmed the direction.
 
 ## Suggested vision response schema
 
